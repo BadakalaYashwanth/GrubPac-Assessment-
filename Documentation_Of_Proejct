@@ -1,0 +1,276 @@
+Today's date is 9th April 2026
+
+The first thing I did was create the frontend and backend folders. In the frontend, I used React.
+
+I installed Bootstrap CSS, and in src/app.css, I removed all the code and kept the file empty.
+
+In the backend folder:
+
+npm init -y
+npm i express jsonwebtoken bcrypt body-parser dotenv mongoose joi cors
+
+In the backend, I created an index.js file and a .env file, where I stored the port number for hosting, which is 8080.
+I also installed nodemon.
+
+In the backend folder, I created three folders named:
+
+controller
+middleware
+models
+
+In the models folder, I created a file named db.js.
+
+In that file, I connected to MongoDB online for the database.
+
+In MongoDB, I created an organization named Authentication. In Organization → Authentication, I created a project named Authentication. Then I moved to Clusters, and in the cluster, to deploy my cluster, I used Google GCP.
+
+
+so username: yaswanth052002_db_user
+password: Yashwanth@#6697
+
+
+Then I created the cluster and named the username as yaswanth052002_db_user and set the password for Cluster0.
+
+mongodb+srv://yaswanth052002_db_user:Yashwanth@#6697@cluster0.eueutyn.mongodb.net
+/?appName=Cluster0
+
+mongodb+srv://yaswanth052002_db_user:<Yashwanth@#6697>@cluster0.eueutyn.mongodb.net/?appName=Cluster0
+
+I installed npm install mongodb.
+
+And i have created database named as auth-db and in the collection named as users and created the database 
+
+And update in teh .env file as MONGO_CONN = mongodb+srv://yaswanth052002_db_user:Yashwanth@#6697@cluster0.eueutyn.mongodb.net
+/?appName=Cluster0
+
+And connected in the file db.js
+
+
+
+
+10-04-2026
+
+The MongoDB connection error happens because of Atlas's "Security First" approach. Here are 5 bullet points explaining the issue and the easy steps to conquer it:
+
+⚡ The Problem: Why it's happening
+IP Whitelisting: MongoDB Atlas blocks every connection by default; only "trusted" IP addresses are allowed to talk to your database.
+Network Changes: If you moved from home to a café, or if your internet provider changed your IP, your old "Current IP" rule no longer works.
+Cloud Firewall: The error MongooseServerSelectionError is the database's way of hanging up the phone because it doesn't recognize your "caller ID" (IP address).
+Default Deny: Even with the correct username and password, the network layer will block you before you even get to log in.
+Port Blocking: Sometimes local firewalls or VPNs block port 27017, which MongoDB uses to communicate.
+🏆 The Conquest: Easy Steps to Fix
+Dashboard: Log in to MongoDB Atlas.
+Network Access: Click Network Access under the "Security" tab on the left.
+Add IP: Click the Add IP Address button.
+Allow All: To "conquer" this permanently for development, click Allow Access From Anywhere (it adds 0.0.0.0/0).
+Save & Run: Click Confirm, wait 60 seconds for the status to turn green (Active), and then run node index.js again.
+Pro-Tip: If you are using your .env file, ensure your MONGO_CONN string doesn't have any accidental spaces at the end, as this can also cause connection timeouts
+
+
+
+Then in the backend folder, I created a file named user.js in the models folder.
+
+In that file, I created a schema for the user, and in the schema, I created three fields: name, email, and password.
+
+And i have exported the model to the index.js file.
+
+After connection to the user.js,
+
+In the index.js file i have used the body-parser and cors middleware and i have used the router to route the requests to the auth router.
+
+And i have created the router folder and in the auth router file and i have used the router to route the requests to the auth router.
+
+
+In the Router folder i have created two routes: login and signup.
+
+In the login route, i ha ve used the body-parser to parse the body of the request, and i have used the router to route the requests to the auth router.
+
+In the signup route, i have used the body-parser to parse the body of the request, and i have used the router to route the requests to the auth router.
+
+Then in the index.js i imported the Router and AuthRouter and used the router to route the requests to the auth router.
+
+
+I created a controller folder in the back end in the controller folder I have an auth controller .Js 
+
+
+Then I navigated to the middleware folder in the backend folder and created a file named AuthValidation.js
+
+in that i have used the joi library to validate the data coming from the frontend.
+
+I created signupvalidation and loginvalidation functions in that file.
+that two function are used to validate the data coming from the frontend.using the regex method 
+
+
+and i have used the res.status(400).json({ message: "Bad Request", error }) to send the error to the frontend
+
+and i have used the res.status(200).json({ message: "Success", data: req.body }) to send the success response to the frontend
+
+And i have exported both loginvalidation and signupvalidation into the AuthRouter.js file present in the Router folder
+
+In the AuthRouter.js file i have used the router to route the requests to the auth router.
+
+In the controller folder i have created a file named AuthController.js
+
+In that file i have created two functions: signup and login.
+
+In the signup function i have used the try-catch block to handle the error.
+
+In the try block i have used the userModel.findOne({ email }) to find the user with the given email.
+
+In the catch block i have used the res.status(409).json({ message: "User already exists", error }) to send the error to the frontend
+
+And i have exported both signup and login into the AuthRouter.js file present in the Router folder
+
+And in the singup function i have create a const usermodel create account for the user in the database  and hashed the password usign the bcrypt  
+
+in the error i addes status.code 500 for the internal server error 
+
+
+
+13 APRIL 2026
+
+
+I have issue with the signup as showing the 500 server problem, then fixed the issue 
+and the in the posteman using the post request http://localhost:8080/auth/signup we checked the signup is working correctly or not, in the postem after pasting the http://localhost:8080/auth/signup and using the POST method, in the body section we added the name, email, password but there were not following the regex method 
+
+so update the regex method fro the email, and passowrd 
+
+
+email that are valid 
+
+@gmail.com
+@yahoo.com
+@rocketmail.com
+@yahoo.net
+@ymail.com
+@zohocorp.com
+
+
+password must be  /^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$/"
+
+
+After in the postman using the post method, tried the login 
+in the login we are using the jwt token 
+
+the respone i got is status.code(201)
+in the postman add the creditinals in the body of the postman after pasting the url and use the post method 
+{
+    "message": "Login Success",
+    "success": true,
+    "jwtToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inlhc2h3YW50aEB6b2hvY29ycC5jb20iLCJfaWQiOiI2OWRkMDI0Y2E5N2UyM2VmMzlkZjFmNmUiLCJpYXQiOjE3NzYwOTI1OTQsImV4cCI6MTc3NjE3ODk5NH0.xCHfo7c_IT8z7PP4h-_ydQrJiVW-_vn4ATAbdHhR_2c",
+    "email": "yashwanth@zohocorp.com",
+    "name": "Yashwanth"
+}
+
+
+In the index.js of the backend folder we added app.use('/products', ProductRouter) 
+
+in the roter we have the ProductRouter.js we have added some demo data feild on different devicec
+
+and then in the middlewares folder we added the auth.js in the auth.js 
+we configure that jwt auth token are valid or not like comparing and checck the validy of the token
+
+
+
+And in the postman API we were using the a protected backend route and it is working correctly.
+
+What’s happening in the screenshot:
+
+You sent a GET request to http://localhost:8080/products.
+In headers, you included an Authorization token (JWT).
+Backend middleware (ensureauthenticated) validated that token.
+Since token is valid, the route returned product data JSON.
+Response shows 200 OK, so auth + route flow is successful.
+So this confirms:
+
+Login-generated JWT is usable.
+Product route protection is active.
+Authorized requests can fetch products.
+
+
+
+Installed the npm i react-router-dom react-toastify for the frontend 
+
+13 APRIL 2026 (CONTINUED)
+
+Started a continuous project-tracking workflow with my assistant to document every new action in sequence.
+
+Current documentation baseline confirmed up to frontend dependency installation:
+npm i react-router-dom react-toastify
+
+From this point onward, each newly completed project step will be appended without duplication, keeping the log structured and in chronological order.
+
+
+ quickly check your newly touched frontend files and the documentation tail, then I’ll tell you exactly what update happened most recently.
+
+Your newest update right now is on the frontend side:
+
+Created new page components:
+frontend/src/pages/home.js
+frontend/src/pages/login.js
+frontend/src/pages/signup.js
+Each page currently renders a basic heading (Home, Login, Signup).
+In frontend/src/index.js, the app is wrapped with BrowserRouter, so routing support is now enabled.
+
+Fixed frontend warning from terminal output:
+
+In frontend/src/index.js, removed unused import:
+ToastContainer from react-toastify
+
+After this fix, lint check shows no errors in App.js, signup.js, and index.js.
+
+Updated frontend form UI style in frontend/src/index.css to match expected design.
+
+Changes include:
+- Added soft page background and better card shadow.
+- Improved container spacing, border radius, and max width.
+- Styled form with proper gaps between labels and inputs.
+- Set cleaner input placeholder and bottom-border style.
+- Made signup button full width with purple gradient and rounded corners.
+- Adjusted bottom login-link text styling for better alignment and readability.
+
+Fixed signup page warning in frontend/src/pages/signup.js.
+
+Updated form input handling to use React state correctly:
+- Connected onChange on input fields (name, email, password).
+- Added value binding from LoginInfo state for all fields.
+- Updated handleChange to call setLoginInfo and store typed values.
+
+After this update, lint check shows no warnings/errors in signup.js.
+
+Fixed one more signup warning from terminal output:
+
+In frontend/src/pages/signup.js, connected handleSubmit function to the form:
+form onSubmit={handleSubmit}
+
+After this change, signup.js lint check is clean.
+
+Fixed module resolution error from terminal:
+
+signup.js was importing:
+import { handleError, handleSuccess } from '../utils';
+but utils file was missing.
+
+Created new file:
+frontend/src/utils.js
+
+Added reusable toast helper functions:
+- handleSuccess(message) using toast.success
+- handleError(message) using toast.error
+
+After this fix, signup import issue is resolved and lint is clean.
+
+Tracking workflow reconfirmed:
+
+Assistant will continue to monitor project progress and append only new completed steps in strict sequence, without duplication or missing gaps.
+
+13 APRIL 2026 (CONTINUED - TRACKING CONFIRMED)
+
+Project documentation tracking instructions were updated and confirmed with my assistant.
+
+From this point, the assistant will:
+- Continuously observe newly completed project actions.
+- Maintain awareness of the latest project state and progress.
+- Check what is already written in Documentation_Of_Proejct before adding anything new.
+- Append only new steps at the exact end of this file in chronological order.
+- Keep entries structured, clear, and sequential without duplication or missing gaps.
