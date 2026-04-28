@@ -104,12 +104,24 @@ function TeacherDashboard({ contents, fetchContent }) {
                     </div>
                     <textarea name="description" placeholder="Description" value={uploadInfo.description} onChange={handleChange} />
                     <div className="form-group">
-                        <label>Start Time: <input type="datetime-local" name="startTime" value={uploadInfo.startTime} onChange={handleChange} required /></label>
-                        <label>End Time: <input type="datetime-local" name="endTime" value={uploadInfo.endTime} onChange={handleChange} required /></label>
+                        <label>
+                            Start Time
+                            <input type="datetime-local" name="startTime" value={uploadInfo.startTime} onChange={handleChange} required />
+                        </label>
+                        <label>
+                            End Time
+                            <input type="datetime-local" name="endTime" value={uploadInfo.endTime} onChange={handleChange} required />
+                        </label>
                     </div>
                     <div className="form-group">
-                        <label>Duration (mins): <input type="number" name="durationMinutes" value={uploadInfo.durationMinutes} onChange={handleChange} min="1" required /></label>
-                        <input type="file" onChange={handleFileChange} accept="image/*" required />
+                        <label>
+                            Duration (mins)
+                            <input type="number" name="durationMinutes" value={uploadInfo.durationMinutes} onChange={handleChange} min="1" required />
+                        </label>
+                        <label>
+                            Image Content
+                            <input type="file" onChange={handleFileChange} accept="image/*" required />
+                        </label>
                     </div>
                     <button type="submit" disabled={isLoading}>{isLoading ? 'Uploading...' : 'Upload Content'}</button>
                 </form>

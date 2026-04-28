@@ -90,26 +90,33 @@
     padding: 14px;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #edeff2;
+    border-radius: 12px;
     font-size: 1rem;
-    background: #fdfdfd;
+    transition: all 0.3s ease;
+    background: #fbfbfb;
 }
 
-.upload-form input:focus, 
-.upload-form select:focus, 
-.upload-form textarea:focus {
-    outline: none;
+.upload-form input:focus {
     border-color: #6c5ce7;
+    background: white;
     box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
 }
 
 .upload-form button {
-    padding: 15px;
+    width: 100%;
+    padding: 18px;
     background: #6c5ce7;
     color: white;
     border: none;
     border-radius: 8px;
+    font-size: 1.1rem;
     font-weight: 700;
+    letter-spacing: 0.5px;
     cursor: pointer;
+    margin-top: 20px;
     transition: transform 0.2s ease;
 }
 
@@ -118,13 +125,19 @@
     background: #a29bfe;
 }
 
-/* Table Enhancements */
+/* Table */
+.content-list h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
 .table-responsive {
     background: white;
-    border-radius: 16px;
+    border-radius: 20px;
     box-shadow: 0 4px 25px rgba(0,0,0,0.05);
     overflow: hidden;
     margin-top: 20px;
+    border: 1px solid #edf2f7;
 }
 
 table {
@@ -134,16 +147,17 @@ table {
 }
 
 th {
-    background: #fdfdfd;
-    padding: 20px;
+    padding: 22px;
     text-align: left;
     font-size: 0.85rem;
+    font-weight: 700;
     color: #636e72;
+    background: #f8fafc;
     border-bottom: 2px solid #f1f2f6;
 }
 
 td {
-    padding: 20px;
+    padding: 22px;
     font-size: 0.95rem;
     color: #2d3436;
     border-bottom: 1px solid #f1f2f6;
