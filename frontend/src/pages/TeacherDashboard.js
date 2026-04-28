@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { handleError, handleSuccess } from '../utils';
 
 function TeacherDashboard({ contents, fetchContent }) {
