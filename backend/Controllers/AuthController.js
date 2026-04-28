@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken')
 
 const signup = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, role } = req.body;
         const user = await UserModel.findOne({ email });
         if (user) {
             return res.status(409).json({ message: "User already exists", success: false });
         }
 
-        const newUser = new UserModel({ name, email, password });
+        const newUser = new UserModel({ name, email, password, role: role || 'teacher' });
         newUser.password = await bcrypt.hash(password, 10);
         await newUser.save();
 
@@ -50,7 +50,7 @@ const login = async (req, res) => {
         //{ expiresIn: '24h' } is the expiration time for the token
         //{ email: user.email, _id: user._id } is the payload data
         const jwtToken = jwt.sign(
-            { email: user.email, _id: user._id },
+            { email: user.email, _id: user._id, role: user.role },
 
             //secret key for the token and the secret key is stored in the .env file
             process.env.JWT_SECRET,
@@ -63,7 +63,8 @@ const login = async (req, res) => {
             success: true,
             jwtToken,
             email,
-            name: user.name
+            name: user.name,
+            role: user.role
         });
     } catch (error) {
         console.error("Login Error:", error);

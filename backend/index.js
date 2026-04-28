@@ -5,8 +5,9 @@ const cors = require('cors')
 require('dotenv').config();  //Load env variables from the config file
 const PORT = process.env.PORT || 8080;
 require('./Models/db');
-const AuthRouter = require('./Router/AuthRouter') // Importing the router
-const ProductRouter = require('./Router/ProductRouter')
+const AuthRouter = require('./Router/AuthRouter');
+const ProductRouter = require('./Router/ProductRouter');
+const ContentRouter = require('./Router/ContentRouter');
 
 app.get("/ping", (req, res) => {
     res.send("pong");
@@ -15,11 +16,13 @@ app.get("/ping", (req, res) => {
 //Using the middleware and we are using the JSON Format 
 app.use(bodyparser.json())
 //CORS --> Cross Origin Resource Sharing, it is used to allow the frontend to access the backend
-app.use(cors())
+app.use(cors());
+app.use('/uploads', express.static('uploads'));
+
 //ROUTER
-app.use('/auth', AuthRouter) // Using the router
-//Product Router --> 
-app.use('/products', ProductRouter)
+app.use('/api/auth', AuthRouter);
+app.use('/api/products', ProductRouter);
+app.use('/api/content', ContentRouter);
 app.listen(PORT, () => {
     console.log(`Server Online on port ${PORT}`);
 })

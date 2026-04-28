@@ -32,8 +32,13 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-
-})
+    role: {
+        type: String,
+        enum: ['teacher', 'principal'],
+        default: 'teacher',
+        required: true,
+    }
+}, { timestamps: true })
 
 // creating model, model means --> collection (table) in database
 const UserModel = mongoose.model('users', UserSchema)

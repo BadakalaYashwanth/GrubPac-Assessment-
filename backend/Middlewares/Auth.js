@@ -15,6 +15,16 @@ const ensureauthenticated = (req, res, next) => {
     }
 }
 
+const ensureRole = (roles) => {
+    return (req, res, next) => {
+        if (!req.user || !roles.includes(req.user.role)) {
+            return res.status(403).json({ message: "Forbidden: Insufficient permissions", success: false });
+        }
+        next();
+    }
+}
+
 module.exports = {
-    ensureauthenticated
+    ensureauthenticated,
+    ensureRole
 }

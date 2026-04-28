@@ -9,7 +9,8 @@ function Signup() {
         email: '',
         password: '',
         role: 'teacher'
-    })
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -23,8 +24,9 @@ function Signup() {
         if (!name || !email || !password) {
             return handleError('Name, email and password are required')
         }
+        setIsLoading(true);
         try {
-            const url = `https://grubpac-assessment.onrender.com/api/auth/register`;
+            const url = `http://localhost:8080/api/auth/signup`; // Using local for dev, will update to live URL later
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -42,6 +44,8 @@ function Signup() {
             }
         } catch (err) {
             handleError(err.message);
+        } finally {
+            setIsLoading(false);
         }
     }
     return (
@@ -67,7 +71,9 @@ function Signup() {
                         <option value="principal">Principal</option>
                     </select>
                 </div>
-                <button type='submit'>Signup</button>
+                <button type='submit' disabled={isLoading}>
+                    {isLoading ? 'Loading (Server waking up...)' : 'Signup'}
+                </button>
                 <span>Already have an account ? <Link to="/login">Login</Link></span>
             </form>
             <ToastContainer />

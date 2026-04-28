@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { handleError, handleSuccess } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import './home.css';
+import TeacherDashboard from './TeacherDashboard';
+import PrincipalDashboard from './PrincipalDashboard';
 
 function Home() {
     const [loggedInUser, setLoggedInUser] = useState('');
@@ -34,8 +36,8 @@ function Home() {
             }
 
             const url = role === 'principal' 
-                ? "https://grubpac-assessment.onrender.com/api/admin/content/all" 
-                : "https://grubpac-assessment.onrender.com/api/content/my-content";
+                ? "http://localhost:8080/api/content/admin/all" 
+                : "http://localhost:8080/api/content/my-content";
                 
             const response = await fetch(url, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -74,25 +76,15 @@ function Home() {
                 <button className='logout-btn' onClick={handleLogout}>Logout</button>
             </header>
 
-            <section className='product-grid'>
-                {contents.map((item, index) => (
-                    <article className='product-card' key={item._id || index} style={{minHeight: '200px'}}>
-                        <div className='product-info' style={{padding: '20px'}}>
-                            <h3>{item.title}</h3>
-                            <p style={{margin: '5px 0'}}><strong>Subject:</strong> {item.subject}</p>
-                            <p style={{margin: '5px 0'}}><strong>Status:</strong> <span style={{fontWeight: 'bold', color: item.status === 'approved' ? 'green' : item.status === 'rejected' ? 'red' : 'orange'}}>{item.status.toUpperCase()}</span></p>
-                            <p style={{margin: '5px 0'}}><strong>Duration:</strong> {item.durationMinutes} mins</p>
-                            {item.rejectionReason && <p style={{margin: '5px 0', color: 'red'}}><strong>Reason:</strong> {item.rejectionReason}</p>}
-                        </div>
-                    </article>
-                ))}
-            </section>
-
-            {!contents.length && (
-                <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
-                    <p className='empty-products' style={{fontSize: '20px'}}>No uploaded content available right now.</p>
-                </div>
-            )}
+            <main className='dashboard-content'>
+                {userRole === 'teacher' ? (
+                    <TeacherDashboard contents={contents} fetchContent={fetchContent} />
+                ) : userRole === 'principal' ? (
+                    <PrincipalDashboard contents={contents} fetchContent={fetchContent} />
+                ) : (
+                    <p>Loading your dashboard...</p>
+                )}
+            </main>
 
             <div><ToastContainer /></div>
         </div>

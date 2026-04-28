@@ -7,7 +7,8 @@ function Login() {
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: ''
-    })
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -21,8 +22,9 @@ function Login() {
         if (!email || !password) {
             return handleError('Email and password are required')
         }
+        setIsLoading(true);
         try {
-            const url = `https://grubpac-assessment.onrender.com/api/auth/login`;
+            const url = `http://localhost:8080/api/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -42,6 +44,8 @@ function Login() {
             }
         } catch (err) {
             handleError(err.message);
+        } finally {
+            setIsLoading(false);
         }
     }
     return (
@@ -56,7 +60,9 @@ function Login() {
                     <label htmlFor='password'>Password</label>
                     <input onChange={handleChange} type='password' name='password' placeholder='Enter your password...' value={loginInfo.password} />
                 </div>
-                <button type='submit'>Login</button>
+                <button type='submit' disabled={isLoading}>
+                    {isLoading ? 'Loading (Server waking up...)' : 'Login'}
+                </button>
                 <span>Don't have an account ? <Link to="/signup">Signup</Link></span>
             </form>
             <ToastContainer />
