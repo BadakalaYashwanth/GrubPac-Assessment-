@@ -37,7 +37,7 @@ function TeacherDashboard({ contents, fetchContent }) {
         setIsLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const url = "http://localhost:8080/api/content/upload";
+            const url = "https://grubpac-assessment.onrender.com/api/content/upload";
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Authorization': `Bearer ${token}` },
@@ -70,7 +70,7 @@ function TeacherDashboard({ contents, fetchContent }) {
         if (!window.confirm('Are you sure you want to delete this?')) return;
         try {
             const token = localStorage.getItem('token');
-            const url = `http://localhost:8080/api/content/${id}`;
+            const url = `https://grubpac-assessment.onrender.com/api/content/${id}`;
             const response = await fetch(url, {
                 method: "DELETE",
                 headers: { 'Authorization': `Bearer ${token}` }

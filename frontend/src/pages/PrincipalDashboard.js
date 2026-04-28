@@ -8,7 +8,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
     const handleApprove = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const url = `http://localhost:8080/api/content/admin/${id}/approve`;
+            const url = `https://grubpac-assessment.onrender.com/api/content/admin/${id}/approve`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -30,7 +30,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
         if (!rejectionReason) return handleError('Reason is mandatory');
         try {
             const token = localStorage.getItem('token');
-            const url = `http://localhost:8080/api/content/admin/${rejectingId}/reject`;
+            const url = `https://grubpac-assessment.onrender.com/api/content/admin/${rejectingId}/reject`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: { 
@@ -74,7 +74,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
                                     <td>{item.uploadedBy?.name}</td>
                                     <td>{item.title}</td>
                                     <td>{item.subject}</td>
-                                    <td><a href={`http://localhost:8080${item.fileUrl}`} target="_blank" rel="noreferrer">View File</a></td>
+                                    <td><a href={`https://grubpac-assessment.onrender.com${item.fileUrl}`} target="_blank" rel="noreferrer">View File</a></td>
                                     <td>
                                         <button onClick={() => handleApprove(item._id)} className="approve-btn">Approve</button>
                                         <button onClick={() => setRejectingId(item._id)} className="reject-btn">Reject</button>

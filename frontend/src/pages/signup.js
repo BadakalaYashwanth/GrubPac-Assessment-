@@ -26,7 +26,7 @@ function Signup() {
         }
         setIsLoading(true);
         try {
-            const url = `http://localhost:8080/api/auth/signup`; // Using local for dev, will update to live URL later
+            const url = `https://grubpac-assessment.onrender.com/api/auth/signup`; // Using local for dev, will update to live URL later
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
