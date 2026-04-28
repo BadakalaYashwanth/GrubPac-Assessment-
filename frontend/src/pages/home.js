@@ -10,6 +10,7 @@ function Home() {
     const [loggedInUser, setLoggedInUser] = useState('');
     const [userRole, setUserRole] = useState('');
     const [contents, setContents] = useState([]);
+    const [fetchError, setFetchError] = useState('');
     const hasFetched = useRef(false);
     const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ function Home() {
             const result = await response.json();
             
             if (!response.ok) {
-                handleError(result?.message || 'Unable to fetch contents');
+                setFetchError(result?.message || 'Unable to fetch contents');
                 if (response.status === 401 || response.status === 403) {
                     setTimeout(() => navigate('/login'), 1000);
                 }
@@ -54,8 +55,9 @@ function Home() {
             }
 
             setContents(result.data || []);
+            setFetchError('');
         } catch (err) {
-            handleError(err?.message || 'Something went wrong');
+            setFetchError(err?.message || 'Something went wrong');
             setContents([]);
         }
     }, [navigate])
@@ -85,6 +87,12 @@ function Home() {
                     <p>Loading your dashboard...</p>
                 )}
             </main>
+
+            {fetchError && (
+                <div style={{ marginTop: '20px', padding: '10px', background: '#fff0f0', border: '1px solid #ffcccc', borderRadius: '8px', color: '#ff4d4d', fontSize: '0.9rem' }}>
+                    <strong>Note:</strong> {fetchError}
+                </div>
+            )}
 
             <div><ToastContainer /></div>
         </div>
