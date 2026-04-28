@@ -8,7 +8,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
     const handleApprove = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const url = `https://grubpac-assessment.onrender.com/api/content/admin/${id}/approve`;
+            const url = `https://grubpac-assessment.onrender.com/api/admin/content/${id}/approve`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -30,7 +30,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
         if (!rejectionReason) return handleError('Reason is mandatory');
         try {
             const token = localStorage.getItem('token');
-            const url = `https://grubpac-assessment.onrender.com/api/content/admin/${rejectingId}/reject`;
+            const url = `https://grubpac-assessment.onrender.com/api/admin/content/${rejectingId}/reject`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: { 

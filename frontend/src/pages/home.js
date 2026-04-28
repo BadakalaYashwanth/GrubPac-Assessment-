@@ -36,7 +36,7 @@ function Home() {
             }
 
             const url = role === 'principal' 
-                ? "https://grubpac-assessment.onrender.com/api/content/admin/all" 
+                ? "https://grubpac-assessment.onrender.com/api/admin/content/all" 
                 : "https://grubpac-assessment.onrender.com/api/content/my-content";
                 
             const response = await fetch(url, {
