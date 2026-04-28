@@ -71,7 +71,7 @@ function Home({ setIsAuthenticated }) {
 
     return (
         <div className='home-page'>
-            <div className="dashboard-container">
+            <div className="main-app-container">
                 <header className='home-header'>
                     <div>
                         <p className='home-subtitle'>Content Broadcasting Dashboard</p>

@@ -88,7 +88,7 @@ function TeacherDashboard({ contents, fetchContent }) {
     };
 
     return (
-        <div className="dashboard-container">
+        <>
             <section className="upload-section">
                 <h2>Upload New Content</h2>
                 <form onSubmit={handleUpload} className="upload-form">
@@ -152,7 +152,7 @@ function TeacherDashboard({ contents, fetchContent }) {
                     </table>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 

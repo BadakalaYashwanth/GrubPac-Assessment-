@@ -54,7 +54,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
     };
 
     return (
-        <div className="dashboard-container">
+        <>
             <section className="pending-section">
                 <h2>Pending Approvals</h2>
                 <div className="table-responsive">
@@ -131,7 +131,7 @@ function PrincipalDashboard({ contents, fetchContent }) {
                     </table>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 
