@@ -70,30 +70,31 @@ function Home() {
 
     return (
         <div className='home-page'>
-            <header className='home-header'>
-                <div>
-                    <p className='home-subtitle'>Content Broadcasting Dashboard</p>
-                    <h1>Welcome {loggedInUser || "User"} {userRole && `(${userRole.toUpperCase()})`}</h1>
-                </div>
-                <button className='logout-btn' onClick={handleLogout}>Logout</button>
-            </header>
+            <div className="dashboard-container">
+                <header className='home-header'>
+                    <div>
+                        <p className='home-subtitle'>Content Broadcasting Dashboard</p>
+                        <h1>Welcome {loggedInUser || "User"} {userRole && `(${userRole.toUpperCase()})`}</h1>
+                    </div>
+                    <button className='logout-btn' onClick={handleLogout}>Logout</button>
+                </header>
 
-            <main className='dashboard-content'>
-                {userRole === 'teacher' ? (
-                    <TeacherDashboard contents={contents} fetchContent={fetchContent} />
-                ) : userRole === 'principal' ? (
-                    <PrincipalDashboard contents={contents} fetchContent={fetchContent} />
-                ) : (
-                    <p>Loading your dashboard...</p>
+                <main className='dashboard-content'>
+                    {userRole === 'teacher' ? (
+                        <TeacherDashboard contents={contents} fetchContent={fetchContent} />
+                    ) : userRole === 'principal' ? (
+                        <PrincipalDashboard contents={contents} fetchContent={fetchContent} />
+                    ) : (
+                        <p>Loading your dashboard...</p>
+                    )}
+                </main>
+
+                {fetchError && (
+                    <div style={{ marginTop: '20px', padding: '10px', background: '#fff0f0', border: '1px solid #ffcccc', borderRadius: '8px', color: '#ff4d4d', fontSize: '0.9rem' }}>
+                        <strong>Note:</strong> {fetchError}
+                    </div>
                 )}
-            </main>
-
-            {fetchError && (
-                <div style={{ marginTop: '20px', padding: '10px', background: '#fff0f0', border: '1px solid #ffcccc', borderRadius: '8px', color: '#ff4d4d', fontSize: '0.9rem' }}>
-                    <strong>Note:</strong> {fetchError}
-                </div>
-            )}
-
+            </div>
             <div><ToastContainer /></div>
         </div>
     )

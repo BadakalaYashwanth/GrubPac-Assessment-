@@ -114,36 +114,43 @@
     background: #a29bfe;
 }
 
-/* Table Styling */
+/* Table Enhancements */
 .table-responsive {
-    overflow-x: auto;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-top: 20px;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-th, td {
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 th {
-    background: #f8f9fa;
-    font-weight: 600;
-    color: #444;
+    background: #fdfdfd;
+    padding: 20px;
+    text-align: left;
+    font-size: 0.85rem;
+    color: #636e72;
+    border-bottom: 2px solid #f1f2f6;
+}
+
+td {
+    padding: 20px;
+    font-size: 0.95rem;
+    color: #2d3436;
+    border-bottom: 1px solid #f1f2f6;
 }
 
 .status-badge {
-    padding: 4px 10px;
+    padding: 6px 14px;
     border-radius: 20px;
-    font-size: 0.8rem;
     font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
 }
 
 .status-badge.pending { background: #fff3cd; color: #856404; }
