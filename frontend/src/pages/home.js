@@ -6,7 +6,7 @@ import './home.css';
 import TeacherDashboard from './TeacherDashboard';
 import PrincipalDashboard from './PrincipalDashboard';
 
-function Home() {
+function Home({ setIsAuthenticated }) {
     const [loggedInUser, setLoggedInUser] = useState('');
     const [userRole, setUserRole] = useState('');
     const [contents, setContents] = useState([]);
@@ -23,6 +23,7 @@ function Home() {
         localStorage.removeItem('token');
         localStorage.removeItem('loggedInUser');
         localStorage.removeItem('userRole');
+        setIsAuthenticated(false);
         handleSuccess('User Logged out');
         setTimeout(() => navigate('/login'), 1000)
     }
