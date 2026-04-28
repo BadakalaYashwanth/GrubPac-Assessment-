@@ -22,7 +22,7 @@ function Login() {
             return handleError('Email and password are required')
         }
         try {
-            const url = `http://localhost:8000/api/auth/login`;
+            const url = `https://grubpac-assessment.onrender.com/api/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },

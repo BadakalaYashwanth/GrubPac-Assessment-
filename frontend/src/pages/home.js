@@ -34,8 +34,8 @@ function Home() {
             }
 
             const url = role === 'principal' 
-                ? "http://localhost:8000/api/admin/content/all" 
-                : "http://localhost:8000/api/content/my-content";
+                ? "https://grubpac-assessment.onrender.com/api/admin/content/all" 
+                : "https://grubpac-assessment.onrender.com/api/content/my-content";
                 
             const response = await fetch(url, {
                 headers: { 'Authorization': `Bearer ${token}` }

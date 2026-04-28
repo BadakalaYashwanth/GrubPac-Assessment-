@@ -24,7 +24,7 @@ function Signup() {
             return handleError('Name, email and password are required')
         }
         try {
-            const url = `http://localhost:8000/api/auth/register`;
+            const url = `https://grubpac-assessment.onrender.com/api/auth/register`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
